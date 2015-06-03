@@ -17,6 +17,7 @@ namespace UpdateProc.Update {
         private string fileNameNoExt;
         private string url;
         private string version;
+        private string txtVersion;
         private string zipFile;
         private string runFile;
         private TextBox textBox;
@@ -30,6 +31,7 @@ namespace UpdateProc.Update {
             fileNameNoExt = jsonData["FileNameNoExt"].ToString ();
             url = @jsonData["Url"].ToString ();
             version = @jsonData["Md5"].ToString ();
+            txtVersion = @jsonData["VersionTxt"].ToString ();
             zipFile = fileNameNoExt + ".zip";
             runFile = fileNameNoExt + Path.DirectorySeparatorChar + @jsonData["RunFile"].ToString ();
 
@@ -70,7 +72,12 @@ namespace UpdateProc.Update {
                     System.Environment.Exit (0);
                 }
             } else {
-                textBox.Paste ("已经是最新版本了...");
+                textBox.Paste ("已经是最新版本了...\r\n");
+                if (!CheckTxtVersion ()) {
+                    textBox.Paste ("删除缓存...\r\n");
+                    DeleteCache ();
+                    textBox.Paste ("OK...\r\n");
+                }
                 Process p = new Process ();
                 p.StartInfo.FileName = System.IO.Directory.GetCurrentDirectory () + Path.DirectorySeparatorChar + runFile;
                 p.Start ();
@@ -108,6 +115,30 @@ namespace UpdateProc.Update {
             }
         }
 
+        private bool CheckTxtVersion () {
+            Random rd = new Random ();
+            string verMd5 = txtVersion + "?random=" + rd.Next (100);
+            string remotVerMd5 = client.DownloadString (verMd5);
+            string localPath = GetLocalPath ();
+            if (localPath != null) {
+                string path = localPath + Path.DirectorySeparatorChar + "version";
+                if (File.Exists (path)) {
+                    string localVersion = GetMD5HashFromFile (path);
+                    if (remotVerMd5 == null || "00000".Equals (remotVerMd5)) {
+                        return false;
+                    }
+                	if (!remotVerMd5.Equals (localVersion)) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+                return true;
+            } else {
+                return true;
+            }
+        }
+
         public void DeleteOldFile () {
             if (File.Exists (zipFile)) {
                 File.Delete (zipFile);
@@ -127,31 +158,35 @@ namespace UpdateProc.Update {
         }
 
         private void DeleteCache () {
+            string path = GetLocalPath ();
+            if (path != null) {
+                DirectoryInfo dir = new DirectoryInfo (path);
+                if (dir.Exists) {
+                    FileInfo[] fileInfo = dir.GetFiles ();
+                    foreach (FileInfo file in fileInfo) {
+                        file.Delete ();
+                    }
+
+                    DirectoryInfo[] dirInfos = dir.GetDirectories ();
+                    foreach (DirectoryInfo directory in dirInfos) {
+                        directory.Delete (true);
+                    }
+                }
+            }
+        }
+
+        private string GetLocalPath () {
             string path = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
             string pathLow = path + "Low";
             DirectoryInfo dir = new DirectoryInfo (path +  Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB");
             if (dir.Exists) {
-                FileInfo[] fileInfo = dir.GetFiles ();
-                foreach (FileInfo file in fileInfo) {
-                    file.Delete ();
-                }
-
-                DirectoryInfo[] dirInfos = dir.GetDirectories ();
-                foreach (DirectoryInfo directory in dirInfos) {
-                    directory.Delete (true);
-                }
+                return path + Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB";
             } else {
                 dir = new DirectoryInfo (pathLow +  Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB");
                 if (dir.Exists) {
-                    FileInfo[] fileInfo = dir.GetFiles ();
-                	foreach (FileInfo file in fileInfo) {
-                	    file.Delete ();
-                	}
-
-                	DirectoryInfo[] dirInfos = dir.GetDirectories ();
-                	foreach (DirectoryInfo directory in dirInfos) {
-                	    directory.Delete (true);
-                	}
+                    return pathLow + Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB";
+                } else {
+                    return null;
                 }
             }
         }
