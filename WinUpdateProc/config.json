@@ -1,7 +1,7 @@
 ﻿{
     "FileNameNoExt": "warbird-windows"
-    ,"Url": "http://public.syg/dev/index.php/release/winpack"
-    ,"Md5": "http://public.syg/dev/index.php/release/winpack_md5"
-    ,"VersionTxt": "http://public.syg/dev/index.php/release/version_md5"
-    ,"RunFile": "warbird.exe"
+    ,"Url": "http://192.168.1.101/dev/index.php/release/winpack"
+    ,"Md5": "http://192.168.1.101/dev/index.php/release/winpack_md5"
+    ,"VersionTxt": "http://192.168.1.101/dev/index.php/release/version_md5"
+    ,"RunFile": "fswy.exe"
 }

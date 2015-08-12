@@ -42,8 +42,8 @@ namespace UpdateProc.Update {
                     textBox.Paste ("删除本地文件...");
                     DeleteOldFile ();
                     textBox.Paste ("  OK\r\n");
-                    textBox.Paste ("删除缓存...");
-                    DeleteCache ();
+                    // textBox.Paste ("删除缓存...");
+                    // DeleteCache ();
                     textBox.Paste ("OK\r\n");
                     textBox.Paste ("更新文件...");
                     Random rd = new Random ();
@@ -74,9 +74,9 @@ namespace UpdateProc.Update {
             } else {
                 textBox.Paste ("已经是最新版本了...\r\n");
                 if (!CheckTxtVersion ()) {
-                    textBox.Paste ("删除缓存...\r\n");
-                    DeleteCache ();
-                    textBox.Paste ("OK...\r\n");
+                    // textBox.Paste ("删除缓存...\r\n");
+                    // DeleteCache ();
+                    // textBox.Paste ("OK...\r\n");
                 }
                 Process p = new Process ();
                 p.StartInfo.FileName = System.IO.Directory.GetCurrentDirectory () + Path.DirectorySeparatorChar + runFile;
@@ -178,13 +178,13 @@ namespace UpdateProc.Update {
         private string GetLocalPath () {
             string path = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
             string pathLow = path + "Low";
-            DirectoryInfo dir = new DirectoryInfo (path +  Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB");
+            DirectoryInfo dir = new DirectoryInfo (path + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________");
             if (dir.Exists) {
-                return path + Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB";
+                return path + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________";
             } else {
-                dir = new DirectoryInfo (pathLow +  Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB");
+                dir = new DirectoryInfo (pathLow + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________");
                 if (dir.Exists) {
-                    return pathLow + Path.DirectorySeparatorChar + "SYTech" + Path.DirectorySeparatorChar + "WB";
+                    return pathLow + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________";
                 } else {
                     return null;
                 }
