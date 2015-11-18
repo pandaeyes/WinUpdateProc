@@ -33,7 +33,7 @@
             // BackGroupImage
             // 
             this.BackGroupImage.Image = global::WinUpdateProc.Properties.Resources.bg;
-            this.BackGroupImage.Location = new System.Drawing.Point(168, -10);
+            this.BackGroupImage.Location = new System.Drawing.Point(389, -10);
             this.BackGroupImage.Name = "BackGroupImage";
             this.BackGroupImage.Size = new System.Drawing.Size(502, 490);
             this.BackGroupImage.TabIndex = 1;
@@ -45,19 +45,20 @@
             // OutputTextBox
             // 
             this.OutputTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.OutputTextBox.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.OutputTextBox.ForeColor = System.Drawing.Color.Indigo;
-            this.OutputTextBox.Location = new System.Drawing.Point(95, 115);
+            this.OutputTextBox.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.OutputTextBox.ForeColor = System.Drawing.Color.Black;
+            this.OutputTextBox.Location = new System.Drawing.Point(3, 115);
             this.OutputTextBox.Multiline = true;
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
-            this.OutputTextBox.Size = new System.Drawing.Size(289, 261);
+            this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.OutputTextBox.Size = new System.Drawing.Size(888, 365);
             this.OutputTextBox.TabIndex = 2;
             // 
             // CloseButton
             // 
             this.CloseButton.Image = global::WinUpdateProc.Properties.Resources.close;
-            this.CloseButton.Location = new System.Drawing.Point(592, 32);
+            this.CloseButton.Location = new System.Drawing.Point(834, 23);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(32, 33);
             this.CloseButton.TabIndex = 3;
@@ -68,7 +69,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 477);
+            this.ClientSize = new System.Drawing.Size(895, 477);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.OutputTextBox);
             this.Controls.Add(this.BackGroupImage);

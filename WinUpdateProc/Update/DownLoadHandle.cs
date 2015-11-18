@@ -10,7 +10,8 @@ using System.Resources;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace UpdateProc.Update {
+namespace WinUpdateProc {
+
     class DownLoadHandle {
 
         private WebClient client = new WebClient ();
@@ -69,7 +70,7 @@ namespace UpdateProc.Update {
                     p.Start ();
                     p.Dispose ();
                     // Application.Exit ();
-                    System.Environment.Exit (0);
+                    // System.Environment.Exit (0);
                 }
             } else {
                 textBox.Paste ("已经是最新版本了...\r\n");
@@ -82,8 +83,11 @@ namespace UpdateProc.Update {
                 p.StartInfo.FileName = System.IO.Directory.GetCurrentDirectory () + Path.DirectorySeparatorChar + runFile;
                 p.Start ();
                 p.Dispose ();
-                System.Environment.Exit (0);
+                // System.Environment.Exit (0);
             }
+            ReadLogThread.GetInstance ().textBox = textBox;
+            ReadLogThread.GetInstance ().dir = fileNameNoExt;
+            ReadLogThread.GetInstance ().Start ();
         }
 
         private JsonData ReadConfig () {

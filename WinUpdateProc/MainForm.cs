@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using UpdateProc.Update;
 
 namespace WinUpdateProc {
     public partial class MainForm : Form {
@@ -47,6 +46,7 @@ namespace WinUpdateProc {
             //     }
             // } else {
             downloadThread.Abort ();
+            ReadLogThread.GetInstance ().Abort ();
             System.Environment.Exit (0);
             // }
         }
@@ -54,7 +54,7 @@ namespace WinUpdateProc {
         private void BackGroupImage_Down (object sender, MouseEventArgs e) {
             if (e.Button == System.Windows.Forms.MouseButtons.Left) {
                 Point local = Location;
-                mouseOff = new Point (-(e.X + 168), -(e.Y - 10));
+                mouseOff = new Point (-(e.X + 389), -(e.Y - 10));
                 leftFlag = true;
             }
         }
