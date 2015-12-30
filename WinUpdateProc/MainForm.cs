@@ -26,7 +26,7 @@ namespace WinUpdateProc {
         }
 
         private void Run () {
-            DownLoadHandle load = new DownLoadHandle (this.OutputTextBox);
+            DownLoadHandle load = new DownLoadHandle (this.OutputTextBox, this.errorBox);
             try {
                 running = true;
                 load.Handle ();

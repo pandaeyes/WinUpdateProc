@@ -22,9 +22,11 @@ namespace WinUpdateProc {
         private string zipFile;
         private string runFile;
         private TextBox textBox;
+        private TextBox errorBox;
 
-        public DownLoadHandle (System.Windows.Forms.TextBox textBox) {
+        public DownLoadHandle (System.Windows.Forms.TextBox textBox, System.Windows.Forms.TextBox errorBox) {
             this.textBox = textBox;
+            this.errorBox = errorBox;
         }
 
         public void Handle () {
@@ -43,8 +45,8 @@ namespace WinUpdateProc {
                     textBox.Paste ("删除本地文件...");
                     DeleteOldFile ();
                     textBox.Paste ("  OK\r\n");
-                    // textBox.Paste ("删除缓存...");
-                    // DeleteCache ();
+                    textBox.Paste ("删除缓存...");
+                    DeleteCache ();
                     textBox.Paste ("OK\r\n");
                     textBox.Paste ("更新文件...");
                     Random rd = new Random ();
@@ -74,11 +76,11 @@ namespace WinUpdateProc {
                 }
             } else {
                 textBox.Paste ("已经是最新版本了...\r\n");
-                if (!CheckTxtVersion ()) {
-                    // textBox.Paste ("删除缓存...\r\n");
-                    // DeleteCache ();
-                    // textBox.Paste ("OK...\r\n");
-                }
+                // if (!CheckTxtVersion ()) {
+                //     textBox.Paste ("删除缓存...\r\n");
+                //     DeleteCache ();
+                //     textBox.Paste ("OK...\r\n");
+                // }
                 Process p = new Process ();
                 p.StartInfo.FileName = System.IO.Directory.GetCurrentDirectory () + Path.DirectorySeparatorChar + runFile;
                 p.Start ();
@@ -86,6 +88,7 @@ namespace WinUpdateProc {
                 // System.Environment.Exit (0);
             }
             ReadLogThread.GetInstance ().textBox = textBox;
+            ReadLogThread.GetInstance ().errorBox = errorBox;
             ReadLogThread.GetInstance ().dir = fileNameNoExt;
             ReadLogThread.GetInstance ().Start ();
         }

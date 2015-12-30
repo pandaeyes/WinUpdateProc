@@ -26,6 +26,7 @@
             this.BackGroupImage = new System.Windows.Forms.PictureBox();
             this.OutputTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.PictureBox();
+            this.errorBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.BackGroupImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.SuspendLayout();
@@ -45,14 +46,14 @@
             // OutputTextBox
             // 
             this.OutputTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.OutputTextBox.Font = new System.Drawing.Font("SimSun", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.OutputTextBox.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.OutputTextBox.ForeColor = System.Drawing.Color.Black;
-            this.OutputTextBox.Location = new System.Drawing.Point(3, 115);
+            this.OutputTextBox.Location = new System.Drawing.Point(126, 100);
             this.OutputTextBox.Multiline = true;
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(888, 365);
+            this.OutputTextBox.Size = new System.Drawing.Size(765, 368);
             this.OutputTextBox.TabIndex = 2;
             // 
             // CloseButton
@@ -65,11 +66,24 @@
             this.CloseButton.TabStop = false;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
+            // errorBox
+            // 
+            this.errorBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.errorBox.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.errorBox.ForeColor = System.Drawing.Color.Black;
+            this.errorBox.Location = new System.Drawing.Point(126, 466);
+            this.errorBox.Multiline = true;
+            this.errorBox.Name = "errorBox";
+            this.errorBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.errorBox.Size = new System.Drawing.Size(765, 208);
+            this.errorBox.TabIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 477);
+            this.ClientSize = new System.Drawing.Size(895, 676);
+            this.Controls.Add(this.errorBox);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.OutputTextBox);
             this.Controls.Add(this.BackGroupImage);
@@ -88,6 +102,7 @@
         private System.Windows.Forms.PictureBox BackGroupImage;
         private System.Windows.Forms.TextBox OutputTextBox;
         private System.Windows.Forms.PictureBox CloseButton;
+        private System.Windows.Forms.TextBox errorBox;
 
 
 
