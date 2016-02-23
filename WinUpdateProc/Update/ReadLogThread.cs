@@ -106,6 +106,7 @@ namespace WinUpdateProc {
             int count = 0;
             bool deleteRn = false;
             bool isError = false;
+            bool isAnimatorError = false;
             using (var sr = new StreamReader (fs)) {
                 var s = "";
                 Queue<string> queue = new Queue<string> ();
@@ -120,7 +121,14 @@ namespace WinUpdateProc {
                                 if (s.Trim ().Length > 0 || !deleteRn) {
                                     if (s.Contains ("[ERROR]")) {
                                         isError = true;
+                                    } else if (s.Contains ("Animator.GotoState: State could not be found")) {
+                                        s = "[动作不存在]" + s;
+                                        isError = true;
+                                        isAnimatorError = true;
                                     } else if (s.Contains ("[/ERROR]")) {
+                                        isError = false;
+                                    } else if (isAnimatorError) {
+                                        isAnimatorError = false;
                                         isError = false;
                                     }
                                     if (isError) {
