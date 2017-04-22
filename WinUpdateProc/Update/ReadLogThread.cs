@@ -15,6 +15,7 @@ namespace WinUpdateProc {
         public TextBox textBox { get; set; }
         public TextBox errorBox { get; set; }
         public string dir { get; set; }
+        public string gameName { get; set; }
 
         private ReadLogThread () { }
 
@@ -39,8 +40,7 @@ namespace WinUpdateProc {
         }
 
         public void Run () {
-            string url = @"warbird-windows\xcqy_Data\output_log.txt";
-
+            string url = GetLocalPath() + Path.DirectorySeparatorChar + "output_log.txt";
             FileInfo fileInfo = new FileInfo (url);
             if (fileInfo.Exists) {
                 textBox.Paste ("exists\r\n");
@@ -51,53 +51,18 @@ namespace WinUpdateProc {
                     textBox.Paste ("not exists\r\n");
                     fileInfo = new FileInfo (url);
                     if (fileInfo.Exists) {
-                        textBox.Paste ("not exists taif \r\n");
+                        // textBox.Paste (url + "not exists taif \r\n");
                         Tailf ();
                         return;
                     }
                 }
             }
-
-
-            // var wh = new AutoResetEvent (false);
-            // var fsw = new FileSystemWatcher (@"warbird-windows\xcqy_Data");
-            // fsw.Filter = "output_log.txt";
-            // fsw.Changed += (s, e) => wh.Set ();
-
-            // var fs = new FileStream (url, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-            // bool initRead = false;
-            // using (var sr = new StreamReader (fs)) {
-            //     var s = "";
-            //     Queue<string> queue = new Queue<string> ();
-            //     while (true) {
-            //         s = sr.ReadLine ();
-            //         if (s != null) {
-            //             if (textBox != null && initRead) {
-            //                 while (queue.Count > 0) {
-            //                     textBox.Paste (queue.Dequeue() + "\r\n");
-            //                 }
-            //                 if (!s.Contains ("UnityEngineDebug")) {
-            //                     textBox.Paste (s + "\r\n");
-            //                 }
-            //             } else {
-            //                 if (queue.Count > 10) {
-            //                     queue.Dequeue ();
-            //                 }
-            //                 queue.Enqueue (s);
-            //             }
-            //         } else {
-            //             initRead = true;
-            //             wh.WaitOne (1000);
-            //         }
-            //     }
-            // }
-            // wh.Close ();
         }
 
         private void Tailf () {
-            string url = @"warbird-windows\xcqy_Data\output_log.txt";
+            string url = GetLocalPath() + Path.DirectorySeparatorChar + "output_log.txt";
             var wh = new AutoResetEvent (false);
-            var fsw = new FileSystemWatcher (@"warbird-windows\xcqy_Data");
+            var fsw = new FileSystemWatcher(@"fssj-windows\fssj_Data");
             fsw.Filter = "output_log.txt";
             fsw.Changed += (s, e) => wh.Set ();
 
@@ -158,6 +123,32 @@ namespace WinUpdateProc {
                 }
             }
             wh.Close ();
+        }
+
+        private string GetLocalPath()
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string pathLow = path + "Low";
+            DirectoryInfo dir = new DirectoryInfo(path + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界");
+            if (dir.Exists)
+            {
+                textBox.Paste(dir + "\r\n");
+                return path + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界";
+            }
+            else
+            {
+                dir = new DirectoryInfo(pathLow + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界");
+                if (dir.Exists)
+                {
+                    textBox.Paste(dir + "\r\n");
+                    return pathLow + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界";
+                }
+                else
+                {
+                    textBox.Paste(dir + "not exist\r\n");
+                    return System.IO.Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + @"fssj-windows\fssj_Data";
+                }
+            }
         }
     }
 }

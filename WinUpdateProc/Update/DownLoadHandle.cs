@@ -39,6 +39,7 @@ namespace WinUpdateProc {
             runFile = fileNameNoExt + Path.DirectorySeparatorChar + @jsonData["RunFile"].ToString ();
 
             if (!CheckVersion ()) {
+            // if (false) {
                 bool succ = true;
                 try {
                     textBox.Paste ("发现新版本\r\n");
@@ -87,9 +88,13 @@ namespace WinUpdateProc {
                 p.Dispose ();
                 // System.Environment.Exit (0);
             }
+            string fileName = @jsonData["RunFile"].ToString ();
+            fileName = fileName.Split ('.')[0];
+            textBox.Paste ("fileName:" + fileName + "\r\n");
             ReadLogThread.GetInstance ().textBox = textBox;
             ReadLogThread.GetInstance ().errorBox = errorBox;
             ReadLogThread.GetInstance ().dir = fileNameNoExt;
+            ReadLogThread.GetInstance ().gameName = fileName;
             ReadLogThread.GetInstance ().Start ();
         }
 
@@ -185,13 +190,13 @@ namespace WinUpdateProc {
         private string GetLocalPath () {
             string path = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
             string pathLow = path + "Low";
-            DirectoryInfo dir = new DirectoryInfo (path + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________");
+            DirectoryInfo dir = new DirectoryInfo(path + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界");
             if (dir.Exists) {
-                return path + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________";
+                return path + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界";
             } else {
-                dir = new DirectoryInfo (pathLow + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________");
+                dir = new DirectoryInfo(pathLow + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界");
                 if (dir.Exists) {
-                    return pathLow + Path.DirectorySeparatorChar + "shiyuegame_com" + Path.DirectorySeparatorChar + "____________";
+                    return pathLow + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界";
                 } else {
                     return null;
                 }

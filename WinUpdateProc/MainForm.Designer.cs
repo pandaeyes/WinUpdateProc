@@ -65,11 +65,11 @@
             this.errorBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.errorBox.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.errorBox.ForeColor = System.Drawing.Color.Black;
-            this.errorBox.Location = new System.Drawing.Point(31, 15);
+            this.errorBox.Location = new System.Drawing.Point(3, 3);
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
             this.errorBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.errorBox.Size = new System.Drawing.Size(724, 141);
+            this.errorBox.Size = new System.Drawing.Size(774, 161);
             this.errorBox.TabIndex = 4;
             // 
             // OutputTextBox
@@ -80,12 +80,12 @@
             this.OutputTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.OutputTextBox.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.OutputTextBox.ForeColor = System.Drawing.Color.Black;
-            this.OutputTextBox.Location = new System.Drawing.Point(31, 28);
+            this.OutputTextBox.Location = new System.Drawing.Point(3, 3);
             this.OutputTextBox.Multiline = true;
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(724, 343);
+            this.OutputTextBox.Size = new System.Drawing.Size(769, 393);
             this.OutputTextBox.TabIndex = 2;
             // 
             // splitContainer1
@@ -120,7 +120,7 @@
             this.Controls.Add(this.BackGroupImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
-            this.Text = "风色物语";
+            this.Text = "修仙";
             ((System.ComponentModel.ISupportInitialize)(this.BackGroupImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
