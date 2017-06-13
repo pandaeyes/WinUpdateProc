@@ -11,10 +11,14 @@ namespace WinUpdateProc {
 
         public static ReadLogThread instance = null;
 
+        public string gamePackageCache;
+        public string gamePackageLog;
+        public string gameNameCache;
+        public string zipPackage;
+
         private Thread thread;
         public TextBox textBox { get; set; }
         public TextBox errorBox { get; set; }
-        public string dir { get; set; }
         public string gameName { get; set; }
 
         private ReadLogThread () { }
@@ -62,7 +66,7 @@ namespace WinUpdateProc {
         private void Tailf () {
             string url = GetLocalPath() + Path.DirectorySeparatorChar + "output_log.txt";
             var wh = new AutoResetEvent (false);
-            var fsw = new FileSystemWatcher(@"fssj-windows\fssj_Data");
+            var fsw = new FileSystemWatcher(zipPackage + @"\" + gameName + "_Data");
             fsw.Filter = "output_log.txt";
             fsw.Changed += (s, e) => wh.Set ();
 
@@ -129,24 +133,24 @@ namespace WinUpdateProc {
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string pathLow = path + "Low";
-            DirectoryInfo dir = new DirectoryInfo(path + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界");
+            DirectoryInfo dir = new DirectoryInfo(path + Path.DirectorySeparatorChar + gamePackageLog + Path.DirectorySeparatorChar + gameNameCache);
             if (dir.Exists)
             {
                 textBox.Paste(dir + "\r\n");
-                return path + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界";
+                return path + Path.DirectorySeparatorChar + gamePackageLog + Path.DirectorySeparatorChar + gameNameCache;
             }
             else
             {
-                dir = new DirectoryInfo(pathLow + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界");
+                dir = new DirectoryInfo(pathLow + Path.DirectorySeparatorChar + gamePackageLog + Path.DirectorySeparatorChar + gameNameCache);
                 if (dir.Exists)
                 {
                     textBox.Paste(dir + "\r\n");
-                    return pathLow + Path.DirectorySeparatorChar + "fssj.shiyuegame.com" + Path.DirectorySeparatorChar + "风色世界";
+                    return pathLow + Path.DirectorySeparatorChar + gamePackageLog + Path.DirectorySeparatorChar + gameNameCache;
                 }
                 else
                 {
                     textBox.Paste(dir + "not exist\r\n");
-                    return System.IO.Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + @"fssj-windows\fssj_Data";
+                    return System.IO.Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + zipPackage + @"\" + gameName + "_Data";
                 }
             }
         }

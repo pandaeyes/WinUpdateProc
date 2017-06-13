@@ -15,10 +15,16 @@ namespace WinUpdateProc {
     class DownLoadHandle {
 
         private WebClient client = new WebClient ();
-        private string fileNameNoExt;
+
+        private string zipPackage;
         private string url;
         private string version;
-        private string txtVersion;
+        private string gamePackageCache;
+        private string gamePackageLog;
+        private string gameNameCache;
+        private string gameName;
+
+
         private string zipFile;
         private string runFile;
         private TextBox textBox;
@@ -31,15 +37,18 @@ namespace WinUpdateProc {
 
         public void Handle () {
             JsonData jsonData = ReadConfig ();
-            fileNameNoExt = jsonData["FileNameNoExt"].ToString ();
+            zipPackage = jsonData["ZipPackage"].ToString();
             url = @jsonData["Url"].ToString ();
             version = @jsonData["Md5"].ToString ();
-            txtVersion = @jsonData["VersionTxt"].ToString ();
-            zipFile = fileNameNoExt + ".zip";
-            runFile = fileNameNoExt + Path.DirectorySeparatorChar + @jsonData["RunFile"].ToString ();
+            gamePackageCache = @jsonData["GamePackageCache"].ToString();
+            gamePackageLog = @jsonData["GamePackageLog"].ToString();
+            gameNameCache = @jsonData["GameNameCache"].ToString();
+            gameName = @jsonData["GameName"].ToString();
+
+            zipFile = zipPackage + ".zip";
+            runFile = zipPackage + Path.DirectorySeparatorChar + gameName + ".exe";
 
             if (!CheckVersion ()) {
-            // if (false) {
                 bool succ = true;
                 try {
                     textBox.Paste ("发现新版本\r\n");
@@ -88,13 +97,15 @@ namespace WinUpdateProc {
                 p.Dispose ();
                 // System.Environment.Exit (0);
             }
-            string fileName = @jsonData["RunFile"].ToString ();
-            fileName = fileName.Split ('.')[0];
-            textBox.Paste ("fileName:" + fileName + "\r\n");
+            textBox.Paste ("fileName:" + gameName + "\r\n");
             ReadLogThread.GetInstance ().textBox = textBox;
             ReadLogThread.GetInstance ().errorBox = errorBox;
-            ReadLogThread.GetInstance ().dir = fileNameNoExt;
-            ReadLogThread.GetInstance ().gameName = fileName;
+            ReadLogThread.GetInstance ().gameName = gameName;
+            ReadLogThread.GetInstance().gamePackageCache = gamePackageCache;
+            ReadLogThread.GetInstance().gamePackageLog = gamePackageLog;
+            ReadLogThread.GetInstance().gameNameCache = gameNameCache;
+            ReadLogThread.GetInstance().zipPackage = zipPackage;
+
             ReadLogThread.GetInstance ().Start ();
         }
 
@@ -127,35 +138,35 @@ namespace WinUpdateProc {
             }
         }
 
-        private bool CheckTxtVersion () {
-            Random rd = new Random ();
-            string verMd5 = txtVersion + "?random=" + rd.Next (100);
-            string remotVerMd5 = client.DownloadString (verMd5);
-            string localPath = GetLocalPath ();
-            if (localPath != null) {
-                string path = localPath + Path.DirectorySeparatorChar + "version";
-                if (File.Exists (path)) {
-                    string localVersion = GetMD5HashFromFile (path);
-                    if (remotVerMd5 == null || "00000".Equals (remotVerMd5)) {
-                        return false;
-                    }
-                	if (!remotVerMd5.Equals (localVersion)) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-                return true;
-            } else {
-                return true;
-            }
-        }
+        // private bool CheckTxtVersion () {
+        //     Random rd = new Random ();
+        //     string verMd5 = txtVersion + "?random=" + rd.Next (100);
+        //     string remotVerMd5 = client.DownloadString (verMd5);
+        //     string localPath = GetLocalPath ();
+        //     if (localPath != null) {
+        //         string path = localPath + Path.DirectorySeparatorChar + "version";
+        //         if (File.Exists (path)) {
+        //             string localVersion = GetMD5HashFromFile (path);
+        //             if (remotVerMd5 == null || "00000".Equals (remotVerMd5)) {
+        //                 return false;
+        //             }
+        //         	if (!remotVerMd5.Equals (localVersion)) {
+        //                 return false;
+        //             } else {
+        //                 return true;
+        //             }
+        //         }
+        //         return true;
+        //     } else {
+        //         return true;
+        //     }
+        // }
 
         public void DeleteOldFile () {
             if (File.Exists (zipFile)) {
                 File.Delete (zipFile);
             }
-            DirectoryInfo dir = new DirectoryInfo (fileNameNoExt);
+            DirectoryInfo dir = new DirectoryInfo (zipPackage);
             if (dir.Exists) {
                 FileInfo[] fileInfo = dir.GetFiles ();
                 foreach (FileInfo file in fileInfo) {
@@ -190,13 +201,13 @@ namespace WinUpdateProc {
         private string GetLocalPath () {
             string path = Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData);
             string pathLow = path + "Low";
-            DirectoryInfo dir = new DirectoryInfo(path + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界");
+            DirectoryInfo dir = new DirectoryInfo(path + Path.DirectorySeparatorChar + gamePackageCache + Path.DirectorySeparatorChar + gameNameCache);
             if (dir.Exists) {
-                return path + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界";
+                return path + Path.DirectorySeparatorChar + gamePackageCache + Path.DirectorySeparatorChar + gameNameCache;
             } else {
-                dir = new DirectoryInfo(pathLow + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界");
+                dir = new DirectoryInfo(pathLow + Path.DirectorySeparatorChar + gamePackageCache + Path.DirectorySeparatorChar + gameNameCache);
                 if (dir.Exists) {
-                    return pathLow + Path.DirectorySeparatorChar + "fssj_shiyuegame_com" + Path.DirectorySeparatorChar + "风色世界";
+                    return pathLow + Path.DirectorySeparatorChar + gamePackageCache + Path.DirectorySeparatorChar + gameNameCache;
                 } else {
                     return null;
                 }

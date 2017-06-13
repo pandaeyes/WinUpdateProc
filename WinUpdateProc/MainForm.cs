@@ -23,16 +23,20 @@ namespace WinUpdateProc {
             ThreadStart startDownload = new ThreadStart (Run);
             downloadThread = new Thread (startDownload);
             downloadThread.Start ();
+            Control.CheckForIllegalCrossThreadCalls = false;
         }
 
         private void Run () {
             DownLoadHandle load = new DownLoadHandle (this.OutputTextBox, this.errorBox);
             try {
                 running = true;
+                Thread.Sleep(1000);
                 load.Handle ();
                 running = false;
             } catch (Exception e) {
                 this.OutputTextBox.Paste ("出错了:" + e.Message);
+                // String msg = e.Message;
+                // running = false;
             }
 
         }
@@ -45,6 +49,7 @@ namespace WinUpdateProc {
             // 		Application.Exit ();
             //     }
             // } else {
+
             downloadThread.Abort ();
             ReadLogThread.GetInstance ().Abort ();
             System.Environment.Exit (0);

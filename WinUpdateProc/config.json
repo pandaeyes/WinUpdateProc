@@ -1,7 +1,9 @@
 ﻿{
-    "FileNameNoExt": "fssj-windows"
-    ,"Url": "http://192.168.1.121/dev/index.php/release/winpack"
-    ,"Md5": "http://192.168.1.121/dev/index.php/release/winpack_md5"
-    ,"VersionTxt": "http://192.168.1.121/dev/index.php/release/version_md5"
-    ,"RunFile": "fssj.exe"
+    "ZipPackage": "warbird-windows"
+    ,"Url": "http://192.168.1.101/dev/index.php/release/winpack"
+    ,"Md5": "http://192.168.1.101/dev/index.php/release/winpack_md5"
+    ,"GamePackageCache": "shiyuegame_com"
+    ,"GamePackageLog": "shiyuegame.com"
+    ,"GameName": "xcqy"
+    ,"GameNameCache": "____________"
 }
