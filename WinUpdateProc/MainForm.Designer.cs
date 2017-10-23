@@ -120,7 +120,7 @@
             this.Controls.Add(this.BackGroupImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
-            this.Text = "修仙";
+            this.Text = "风色世界";
             ((System.ComponentModel.ISupportInitialize)(this.BackGroupImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
