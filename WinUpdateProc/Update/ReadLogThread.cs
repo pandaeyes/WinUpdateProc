@@ -103,6 +103,9 @@ namespace WinUpdateProc {
                                     if (isError) {
                                         errorBox.Paste (s + "\r\n");
                                 	    errorBox.SelectionStart = errorBox.Text.Length;
+                                        if (s.Contains("[/ERROR]")) {
+                                            isError = false;
+                                        }
                                     }
                                     textBox.Paste (s + "\r\n");
                                 	count++;
