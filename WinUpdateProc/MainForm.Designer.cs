@@ -28,6 +28,7 @@
             this.errorBox = new System.Windows.Forms.TextBox();
             this.OutputTextBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BackGroupImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -68,8 +69,9 @@
             this.errorBox.Location = new System.Drawing.Point(3, 3);
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
+            this.errorBox.ReadOnly = true;
             this.errorBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.errorBox.Size = new System.Drawing.Size(774, 156);
+            this.errorBox.Size = new System.Drawing.Size(774, 144);
             this.errorBox.TabIndex = 4;
             // 
             // OutputTextBox
@@ -85,7 +87,7 @@
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(769, 393);
+            this.OutputTextBox.Size = new System.Drawing.Size(774, 370);
             this.OutputTextBox.TabIndex = 2;
             // 
             // splitContainer1
@@ -103,19 +105,31 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.errorBox);
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(780, 583);
-            this.splitContainer1.SplitterDistance = 399;
+            this.splitContainer1.Size = new System.Drawing.Size(780, 551);
+            this.splitContainer1.SplitterDistance = 376;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 5;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button1.Location = new System.Drawing.Point(687, 137);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 28);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Cleanup";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 687);
+            this.ClientSize = new System.Drawing.Size(895, 645);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.BackGroupImage);
@@ -140,6 +154,7 @@
         private System.Windows.Forms.TextBox errorBox;
         private System.Windows.Forms.TextBox OutputTextBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button button1;
 
 
 
