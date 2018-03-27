@@ -69,7 +69,7 @@
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
             this.errorBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.errorBox.Size = new System.Drawing.Size(774, 161);
+            this.errorBox.Size = new System.Drawing.Size(774, 156);
             this.errorBox.TabIndex = 4;
             // 
             // OutputTextBox
@@ -104,6 +104,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.errorBox);
+            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(780, 583);
             this.splitContainer1.SplitterDistance = 399;
             this.splitContainer1.SplitterWidth = 10;
@@ -114,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 676);
+            this.ClientSize = new System.Drawing.Size(895, 687);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.BackGroupImage);

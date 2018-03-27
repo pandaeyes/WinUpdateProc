@@ -1,9 +1,9 @@
 ﻿{
-    "ZipPackage": "warbird-windows"
-    ,"Url": "http://192.168.1.101/dev/index.php/release/winpack"
-    ,"Md5": "http://192.168.1.101/dev/index.php/release/winpack_md5"
-    ,"GamePackageCache": "shiyuegame_com"
-    ,"GamePackageLog": "shiyuegame.com"
-    ,"GameName": "xcqy"
-    ,"GameNameCache": "____________"
+    "ZipPackage": "fssj-windows"
+    ,"Url": "http://192.168.1.121/dev/index.php/release/winpack"
+    ,"Md5": "http://192.168.1.121/dev/index.php/release/winpack_md5"
+    ,"GamePackageCache": "fssj_shiyuegame_com"
+    ,"GamePackageLog": "fssj.shiyuegame_com"
+    ,"GameName": "fssj"
+    ,"GameNameCache": "风色世界"
 }
