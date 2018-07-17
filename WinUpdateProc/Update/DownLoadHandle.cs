@@ -9,6 +9,7 @@ using LitJson;
 using System.Resources;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace WinUpdateProc {
 
@@ -23,6 +24,8 @@ namespace WinUpdateProc {
         private string gamePackageLog;
         private string gameNameCache;
         private string gameName;
+        private string user = "Unknow";
+        private string errorUrl = null;
 
 
         private string zipFile;
@@ -44,6 +47,13 @@ namespace WinUpdateProc {
             gamePackageLog = @jsonData["GamePackageLog"].ToString();
             gameNameCache = @jsonData["GameNameCache"].ToString();
             gameName = @jsonData["GameName"].ToString();
+            IDictionary dict = @jsonData as IDictionary;
+            if (dict.Contains("User")) {
+                user = dict["User"].ToString();
+            }
+            if (dict.Contains("ErrorSrvUrl")) {
+                errorUrl = dict["ErrorSrvUrl"].ToString();
+            }
 
             zipFile = zipPackage + ".zip";
             runFile = zipPackage + Path.DirectorySeparatorChar + gameName + ".exe";
@@ -101,12 +111,17 @@ namespace WinUpdateProc {
             ReadLogThread.GetInstance ().textBox = textBox;
             ReadLogThread.GetInstance ().errorBox = errorBox;
             ReadLogThread.GetInstance ().gameName = gameName;
+            ReadLogThread.GetInstance ().user = user;
+            if (errorUrl != null && errorUrl.Trim().Length > 0) {
+                ReadLogThread.GetInstance().errorUrl = errorUrl;
+            }
             ReadLogThread.GetInstance().gamePackageCache = gamePackageCache;
             ReadLogThread.GetInstance().gamePackageLog = gamePackageLog;
             ReadLogThread.GetInstance().gameNameCache = gameNameCache;
             ReadLogThread.GetInstance().zipPackage = zipPackage;
 
             ReadLogThread.GetInstance ().Start ();
+            HttpRequestHandle.GetInstance().Start();
         }
 
         private JsonData ReadConfig () {

@@ -20,6 +20,8 @@ namespace WinUpdateProc {
         public TextBox textBox { get; set; }
         public TextBox errorBox { get; set; }
         public string gameName { get; set; }
+        public string user { get; set; }
+        public string errorUrl { get; set; }
 
         private ReadLogThread () { }
 
@@ -34,6 +36,7 @@ namespace WinUpdateProc {
         public void Start () {
             ThreadStart startDownload = new ThreadStart (Run);
             thread = new Thread (startDownload);
+            thread.IsBackground = true;
             thread.Start ();
         }
 
@@ -79,6 +82,7 @@ namespace WinUpdateProc {
             using (var sr = new StreamReader (fs)) {
                 var s = "";
                 Queue<string> queue = new Queue<string> ();
+                string errLog = "";
                 while (true) {
                     s = sr.ReadLine ();
                     if (s != null) {
@@ -95,15 +99,28 @@ namespace WinUpdateProc {
                                         isError = true;
                                         isAnimatorError = true;
                                     } else if (s.Contains ("[/ERROR]")) {
+                                        if (errLog.Length > 0) {
+                                            errLog = errLog + "<br>" + s;
+                                            HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
+                                            errLog = "";
+                                        }
                                         isError = false;
                                     } else if (isAnimatorError) {
+                                        if (errLog.Length > 0) {
+                                            errLog = errLog + "<br>" + s;
+                                            HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
+                                            errLog = "";
+                                        }
                                         isAnimatorError = false;
                                         isError = false;
                                     }
                                     if (isError) {
                                         errorBox.Paste (s + "\r\n");
                                 	    errorBox.SelectionStart = errorBox.Text.Length;
+                                        errLog = errLog + "<br>" + s;
                                         if (s.Contains("[/ERROR]")) {
+                                            HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
+                                            errLog = "";
                                             isError = false;
                                         }
                                     }
