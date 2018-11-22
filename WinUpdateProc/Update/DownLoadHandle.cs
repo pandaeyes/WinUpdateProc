@@ -24,6 +24,7 @@ namespace WinUpdateProc {
         private string gamePackageLog;
         private string gameNameCache;
         private string gameName;
+        private string title;
         private string user = "Unknow";
         private string errorUrl = null;
 
@@ -53,6 +54,10 @@ namespace WinUpdateProc {
             }
             if (dict.Contains("ErrorSrvUrl")) {
                 errorUrl = dict["ErrorSrvUrl"].ToString();
+            }
+            if (dict.Contains("Title")) {
+                title = dict["Title"].ToString();
+                textBox.FindForm().Text = title;
             }
 
             zipFile = zipPackage + ".zip";
@@ -121,7 +126,7 @@ namespace WinUpdateProc {
             ReadLogThread.GetInstance().zipPackage = zipPackage;
 
             ReadLogThread.GetInstance ().Start ();
-            HttpRequestHandle.GetInstance().Start();
+            // HttpRequestHandle.GetInstance().Start();
         }
 
         private JsonData ReadConfig () {
@@ -138,6 +143,9 @@ namespace WinUpdateProc {
 
         private bool CheckVersion () {
             textBox.Paste ("检查版本...\r\n");
+            if (version == null || version.Trim().Length == 0) {
+                return true;
+            }
             Random rd = new Random ();
             string cli = version + "?random=" + rd.Next (100);
             string remotVersion = client.DownloadString (cli);

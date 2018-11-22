@@ -23,101 +23,88 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent () {
-            this.BackGroupImage = new System.Windows.Forms.PictureBox();
-            this.CloseButton = new System.Windows.Forms.PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.errorBox = new System.Windows.Forms.TextBox();
             this.OutputTextBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.BackGroupImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // BackGroupImage
-            // 
-            this.BackGroupImage.Image = global::WinUpdateProc.Properties.Resources.bg;
-            this.BackGroupImage.Location = new System.Drawing.Point(389, -10);
-            this.BackGroupImage.Name = "BackGroupImage";
-            this.BackGroupImage.Size = new System.Drawing.Size(502, 490);
-            this.BackGroupImage.TabIndex = 1;
-            this.BackGroupImage.TabStop = false;
-            this.BackGroupImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BackGroupImage_Down);
-            this.BackGroupImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BackGroupImage_Move);
-            this.BackGroupImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BackGroupImage_Up);
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Image = global::WinUpdateProc.Properties.Resources.close;
-            this.CloseButton.Location = new System.Drawing.Point(834, 23);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(32, 33);
-            this.CloseButton.TabIndex = 3;
-            this.CloseButton.TabStop = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
-            // 
             // errorBox
             // 
-            this.errorBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.errorBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.errorBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.errorBox.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.errorBox.ForeColor = System.Drawing.Color.Black;
-            this.errorBox.Location = new System.Drawing.Point(3, 3);
+            this.errorBox.Location = new System.Drawing.Point(0, 0);
             this.errorBox.Multiline = true;
             this.errorBox.Name = "errorBox";
             this.errorBox.ReadOnly = true;
             this.errorBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.errorBox.Size = new System.Drawing.Size(774, 144);
+            this.errorBox.Size = new System.Drawing.Size(798, 208);
             this.errorBox.TabIndex = 4;
             // 
             // OutputTextBox
             // 
-            this.OutputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.OutputTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.OutputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OutputTextBox.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.OutputTextBox.ForeColor = System.Drawing.Color.Black;
-            this.OutputTextBox.Location = new System.Drawing.Point(3, 3);
+            this.OutputTextBox.Location = new System.Drawing.Point(0, 0);
             this.OutputTextBox.Multiline = true;
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(774, 370);
+            this.OutputTextBox.Size = new System.Drawing.Size(798, 369);
             this.OutputTextBox.TabIndex = 2;
             // 
             // splitContainer1
             // 
             this.splitContainer1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.splitContainer1.Location = new System.Drawing.Point(111, 91);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.OutputTextBox);
+            this.splitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button2);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.errorBox);
+            this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
-            this.splitContainer1.Size = new System.Drawing.Size(780, 551);
-            this.splitContainer1.SplitterDistance = 376;
+            this.splitContainer1.Size = new System.Drawing.Size(798, 587);
+            this.splitContainer1.SplitterDistance = 369;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 5;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(612, 180);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(90, 28);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Copy";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button1.Location = new System.Drawing.Point(687, 137);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(708, 180);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 28);
             this.button1.TabIndex = 5;
@@ -129,15 +116,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(895, 645);
+            this.ClientSize = new System.Drawing.Size(798, 587);
             this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.CloseButton);
-            this.Controls.Add(this.BackGroupImage);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "风色世界";
-            ((System.ComponentModel.ISupportInitialize)(this.BackGroupImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CloseButton)).EndInit();
+            this.Text = "登录器";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -149,12 +132,11 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox BackGroupImage;
-        private System.Windows.Forms.PictureBox CloseButton;
         private System.Windows.Forms.TextBox errorBox;
         private System.Windows.Forms.TextBox OutputTextBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
 
 
 

@@ -18,7 +18,7 @@ namespace WinUpdateProc {
         public MainForm () {
             InitializeComponent ();
             this.BackColor = Color.White;
-            this.TransparencyKey = Color.White;
+            // this.TransparencyKey = Color.White;
 
             ThreadStart startDownload = new ThreadStart (Run);
             downloadThread = new Thread (startDownload);
@@ -50,8 +50,8 @@ namespace WinUpdateProc {
             //     }
             // } else {
 
-            downloadThread.Abort ();
-            ReadLogThread.GetInstance ().Abort ();
+            // downloadThread.Abort ();
+            // ReadLogThread.GetInstance ().Abort ();
             System.Environment.Exit (0);
             // }
         }
@@ -91,6 +91,11 @@ namespace WinUpdateProc {
 
         private void button1_Click(object sender, EventArgs e) {
             this.errorBox.Text = "";
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            Clipboard.SetDataObject(this.errorBox.Text);
+            this.OutputTextBox.Paste("复制成功\r\n");
         }
     }
 }

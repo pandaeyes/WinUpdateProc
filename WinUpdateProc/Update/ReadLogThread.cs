@@ -98,17 +98,21 @@ namespace WinUpdateProc {
                                         s = "[动作不存在]" + s;
                                         isError = true;
                                         isAnimatorError = true;
+                                    } else if (s.Contains("Invalid AABB")) {
+                                        s = "[NaN Position]" + s;
+                                        isError = true;
+                                        isAnimatorError = true;
                                     } else if (s.Contains ("[/ERROR]")) {
                                         if (errLog.Length > 0) {
                                             errLog = errLog + "<br>" + s;
-                                            HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
+                                            // HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
                                             errLog = "";
                                         }
                                         isError = false;
                                     } else if (isAnimatorError) {
                                         if (errLog.Length > 0) {
                                             errLog = errLog + "<br>" + s;
-                                            HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
+                                            // HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
                                             errLog = "";
                                         }
                                         isAnimatorError = false;
@@ -119,7 +123,7 @@ namespace WinUpdateProc {
                                 	    errorBox.SelectionStart = errorBox.Text.Length;
                                         errLog = errLog + "<br>" + s;
                                         if (s.Contains("[/ERROR]")) {
-                                            HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
+                                            // HttpRequestHandle.GetInstance().AddError(new ErrorVo(errLog, gameName, user));
                                             errLog = "";
                                             isError = false;
                                         }
