@@ -98,6 +98,10 @@ namespace WinUpdateProc {
                                         s = "[动作不存在]" + s;
                                         isError = true;
                                         isAnimatorError = true;
+                                    } else if (!isError && s.Contains("Object reference not set to an instance of an object")) {
+                                        s = "[出错了,请截图]" + s;
+                                        isError = true;
+                                        isAnimatorError = true;
                                     } else if (s.Contains("Invalid AABB")) {
                                         s = "[NaN Position]" + s;
                                         isError = true;
