@@ -47,6 +47,7 @@ namespace WinUpdateProc {
         }
 
         public void Run () {
+            Thread.Sleep (2000);
             string url = GetLocalPath() + Path.DirectorySeparatorChar + "output_log.txt";
             FileInfo fileInfo = new FileInfo (url);
             if (fileInfo.Exists) {
@@ -73,7 +74,13 @@ namespace WinUpdateProc {
             fsw.Filter = "output_log.txt";
             fsw.Changed += (s, e) => wh.Set ();
 
-            var fs = new FileStream (url, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            FileStream fs = null;
+            try {
+                fs = new FileStream(url, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            } catch (Exception e) {
+                Thread.Sleep (1000);
+                fs = new FileStream(url, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            }
             bool initRead = false;
             int count = 0;
             bool deleteRn = false;
@@ -95,6 +102,10 @@ namespace WinUpdateProc {
                                     if (s.Contains ("[ERROR]")) {
                                         isError = true;
                                     } else if (s.Contains ("Animator.GotoState: State could not be found")) {
+                                        s = "[动作不存在]" + s;
+                                        isError = true;
+                                        isAnimatorError = true;
+                                    } else if (s.Contains("The animation state") && s.Contains("could not be played")) {
                                         s = "[动作不存在]" + s;
                                         isError = true;
                                         isAnimatorError = true;
