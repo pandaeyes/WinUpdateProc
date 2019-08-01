@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Threading;
@@ -14,6 +16,7 @@ namespace WinUpdateProc {
         private bool leftFlag = false;
         private Thread downloadThread;
         public bool running = false;
+        public string runFile;
 
         public MainForm () {
             InitializeComponent ();
@@ -32,6 +35,8 @@ namespace WinUpdateProc {
                 running = true;
                 Thread.Sleep(1000);
                 load.Handle ();
+                this.button3.Enabled = true;
+                runFile = load.runFile;
                 running = false;
             } catch (Exception e) {
                 this.OutputTextBox.Paste ("出错了:" + e.Message);
@@ -96,6 +101,15 @@ namespace WinUpdateProc {
         private void button2_Click(object sender, EventArgs e) {
             Clipboard.SetDataObject(this.errorBox.Text);
             this.OutputTextBox.Paste("复制成功\r\n");
+        }
+
+        private void button3_Click(object sender, EventArgs e) {
+            Process p = new Process ();
+            p.StartInfo.FileName = System.IO.Directory.GetCurrentDirectory () + Path.DirectorySeparatorChar + runFile;
+            p.Start ();
+            p.Dispose ();
+            this.OutputTextBox.Paste("开启新客户端，本操作不检查客户端程序更新，如有强更，请重启登录器！！！\r\n");
+            this.errorBox.Paste("开启新客户端，本操作不检查客户端程序更新，如有强更，请重启登录器！！！\r\n");
         }
     }
 }

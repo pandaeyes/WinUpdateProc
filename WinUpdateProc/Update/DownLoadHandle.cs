@@ -30,7 +30,7 @@ namespace WinUpdateProc {
 
 
         private string zipFile;
-        private string runFile;
+        public string runFile;
         private TextBox textBox;
         private TextBox errorBox;
 
