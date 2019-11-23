@@ -96,6 +96,7 @@ namespace WinUpdateProc {
 
         private void button1_Click(object sender, EventArgs e) {
             this.errorBox.Text = "";
+            this.OutputTextBox.Text = "";
         }
 
         private void button2_Click(object sender, EventArgs e) {
