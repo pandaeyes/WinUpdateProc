@@ -27,9 +27,11 @@
             this.errorBox = new System.Windows.Forms.TextBox();
             this.OutputTextBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.wikiBtn = new System.Windows.Forms.Button();
+            this.CopyBtn = new System.Windows.Forms.Button();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -48,6 +50,7 @@
             this.errorBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.errorBox.Size = new System.Drawing.Size(798, 208);
             this.errorBox.TabIndex = 4;
+            this.errorBox.Click += new System.EventHandler(this.errorBox_TextChanged);
             // 
             // OutputTextBox
             // 
@@ -80,8 +83,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button4);
             this.splitContainer1.Panel2.Controls.Add(this.button3);
-            this.splitContainer1.Panel2.Controls.Add(this.button2);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Panel2.Controls.Add(this.errorBox);
             this.splitContainer1.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -92,39 +95,60 @@
             this.splitContainer1.TabIndex = 5;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(631, 180);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(80, 28);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "云上城小家";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(520, 180);
+            this.button3.Location = new System.Drawing.Point(546, 180);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(86, 28);
+            this.button3.Size = new System.Drawing.Size(80, 28);
             this.button3.TabIndex = 7;
             this.button3.Text = "StartNew";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(612, 180);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 28);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Copy";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(708, 180);
+            this.button1.Location = new System.Drawing.Point(716, 180);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 28);
+            this.button1.Size = new System.Drawing.Size(80, 28);
             this.button1.TabIndex = 5;
             this.button1.Text = "Cleanup";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // wikiBtn
+            // 
+            this.wikiBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.wikiBtn.Location = new System.Drawing.Point(2, 4);
+            this.wikiBtn.Name = "wikiBtn";
+            this.wikiBtn.Size = new System.Drawing.Size(74, 28);
+            this.wikiBtn.TabIndex = 1;
+            this.wikiBtn.Text = "云上城小家";
+            this.wikiBtn.UseVisualStyleBackColor = true;
+            this.wikiBtn.Click += new System.EventHandler(this.wikiBtn_Click);
+            // 
+            // CopyBtn
+            // 
+            this.CopyBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CopyBtn.Location = new System.Drawing.Point(2, 35);
+            this.CopyBtn.Name = "CopyBtn";
+            this.CopyBtn.Size = new System.Drawing.Size(74, 28);
+            this.CopyBtn.TabIndex = 0;
+            this.CopyBtn.Text = "复制Error";
+            this.CopyBtn.UseVisualStyleBackColor = true;
+            this.CopyBtn.Click += new System.EventHandler(this.CopyBtn_Click);
             // 
             // MainForm
             // 
@@ -132,6 +156,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 587);
             this.Controls.Add(this.splitContainer1);
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "登录器";
@@ -150,8 +175,11 @@
         private System.Windows.Forms.TextBox OutputTextBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        // private System.Windows.Forms.Panel menuPanel;
+        private System.Windows.Forms.Button CopyBtn;
+        private System.Windows.Forms.Button wikiBtn;
 
 
 

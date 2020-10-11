@@ -18,6 +18,8 @@ namespace WinUpdateProc {
         public bool running = false;
         public string runFile;
 
+        private bool menuIsShow = false;
+
         public MainForm () {
             InitializeComponent ();
             this.BackColor = Color.White;
@@ -111,6 +113,35 @@ namespace WinUpdateProc {
             p.Dispose ();
             this.OutputTextBox.Paste("开启新客户端，本操作不检查客户端程序更新，如有强更，请重启登录器！！！\r\n");
             this.errorBox.Paste("开启新客户端，本操作不检查客户端程序更新，如有强更，请重启登录器！！！\r\n");
+        }
+
+        private void button4_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("http://ysc.wiki"); 
+            // if (this.menuIsShow) {
+            //     this.menuPanel.Hide();
+            //     this.menuIsShow = false;
+            // } else {
+            //     this.menuPanel.Show();
+            //     this.menuIsShow = true;
+            // }
+        }
+
+        private void CopyBtn_Click(object sender, EventArgs e) {
+            Clipboard.SetDataObject(this.errorBox.Text);
+            this.OutputTextBox.Paste("复制成功\r\n");
+            // this.menuPanel.Hide();
+            this.menuIsShow = false;
+        }
+
+        private void wikiBtn_Click(object sender, EventArgs e) {
+            System.Diagnostics.Process.Start("http://ysc.wiki"); 
+            // this.menuPanel.Hide();
+            this.menuIsShow = false;
+        }
+
+        private void errorBox_TextChanged(object sender, EventArgs e) {
+            // this.menuPanel.Hide();
+            this.menuIsShow = false;
         }
     }
 }
